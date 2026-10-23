@@ -30,7 +30,7 @@ def run_web():
 
 
 # --- CONFIGURATION ---
-TOKEN = '8944416320:AAEpQrzPWGmBfnzeoSerHq4WmJRXU1-UMog'  # Put your Telegram Bot Token here
+TOKEN = '8944416320:AAHHyhCYYrNOOH_LRD_j7tvBDbNlVtCWzO4'  # Put your Telegram Bot Token here
 ADMIN_ID = 8729108422  # Put your Personal Telegram ID (for /broadcast)
 ADMIN_GROUP_ID = -1003850262852  # Put your Private Admin Group ID
 CHANNELS = ['@DarkBugBountyHunter', '@pythonJavalanguage', '@fullstackwebdeveloperx']  # 3 Channels
