@@ -6,7 +6,6 @@ import threading
 import urllib.parse
 from datetime import date, datetime
 from flask import Flask
-from gtts import gTTS
 import requests
 import telebot
 from telebot.types import (
@@ -22,7 +21,7 @@ app = Flask('')
 
 @app.route('/')
 def home():
-  return 'Mega All-in-One Super Bot is running live on Render!'
+  return 'Multi-Language Super Bot is running live on Render!'
 
 
 def run_web():
@@ -31,9 +30,9 @@ def run_web():
 
 
 # --- CONFIGURATION ---
-TOKEN = '8944416320:AAEpQrzPWGmBfnzeoSerHq4WmJRXU1-UMog'  # Replace with your Telegram Bot Token
-ADMIN_ID = 8729108422 # Replace with your Telegram User ID (For /broadcast)
-ADMIN_GROUP_ID =-1003850262852  # Replace with your Private Admin Group ID
+TOKEN = '8944416320:AAEpQrzPWGmBfnzeoSerHq4WmJRXU1-UMog'  # Put your Telegram Bot Token here
+ADMIN_ID = 8729108422  # Put your Personal Telegram ID (for /broadcast)
+ADMIN_GROUP_ID = -1003850262852  # Put your Private Admin Group ID
 CHANNELS = ['@DarkBugBountyHunter', '@pythonJavalanguage', '@fullstackwebdeveloperx']  # 3 Channels
 
 bot = telebot.TeleBot(TOKEN)
@@ -60,24 +59,22 @@ QUIZ_QUESTIONS = [
         'options': ['Gold', 'Oxygen', 'Silver', 'Iron'],
         'ans': 'Oxygen',
     },
+    {
+        'q': 'How many continents are there on Earth?',
+        'options': ['5', '6', '7', '8'],
+        'ans': '7',
+    },
 ]
 
-# --- 5 LANGUAGES DICTIONARY ---
+# --- 11 LANGUAGES DICTIONARY ---
 TRANSLATIONS = {
     'en': {
-        'btn_ai': '🤖 AI Assistant',
-        'btn_image': '🎨 Image AI',
         'btn_qr': '📷 QR Code',
-        'btn_short': '🔗 Short URL',
-        'btn_tts': '🗣️ Text to Speech',
-        'btn_math': '🧮 Math Solver',
-        'btn_quote': '💡 Daily Quote',
-        'btn_bonus': '🎁 Daily Bonus',
-        'btn_quiz': '🎮 Quiz Game',
         'btn_font': '✨ Fancy Font',
-        'btn_weather': '🌤️ Weather',
-        'btn_translate': '🌐 Translator',
+        'btn_math': '🧮 Math Solver',
         'btn_pass': '🔐 Password Gen',
+        'btn_quiz': '🎮 Quiz Game',
+        'btn_bonus': '🎁 Daily Bonus',
         'btn_ref': '🔗 Referral',
         'btn_profile': '📊 My Profile',
         'btn_lang': '🗣️ Language',
@@ -87,19 +84,12 @@ TRANSLATIONS = {
         'sub_warning': '⚠️ Join all 3 channels to use the bot!',
     },
     'bn': {
-        'btn_ai': '🤖 এআই চ্যাট',
-        'btn_image': '🎨 ইমেজ জেনারেটর',
         'btn_qr': '📷 কিউআর কোড',
-        'btn_short': '🔗 লিংক ছোট করুন',
-        'btn_tts': '🗣️ লেখা থেকে ভয়েস',
-        'btn_math': '🧮 ম্যাথ সলভার',
-        'btn_quote': '💡 মোটিভেশনাল কোটস',
-        'btn_bonus': '🎁 ডেইলি বোনাস',
-        'btn_quiz': '🎮 কুইজ গেম',
         'btn_font': '✨ স্টাইলিশ ফন্ট',
-        'btn_weather': '🌤️ আবহাওয়া',
-        'btn_translate': '🌐 অনুবাদক',
+        'btn_math': '🧮 ম্যাথ সলভার',
         'btn_pass': '🔐 পাসওয়ার্ড জেনারেটর',
+        'btn_quiz': '🎮 কুইজ গেম',
+        'btn_bonus': '🎁 ডেইলি বোনাস',
         'btn_ref': '🔗 রেফারেল লিংক',
         'btn_profile': '📊 আমার প্রোফাইল',
         'btn_lang': '🗣️ ভাষা পরিবর্তন',
@@ -107,19 +97,12 @@ TRANSLATIONS = {
         'sub_warning': '⚠️ প্রথমে ৩টি চ্যানেলে জয়েন করুন!',
     },
     'ru': {
-        'btn_ai': '🤖 ИИ Ассистент',
-        'btn_image': '🎨 ИИ Картинки',
         'btn_qr': '📷 QR Код',
-        'btn_short': '🔗 Короткая ссылка',
-        'btn_tts': '🗣️ Текст в речь',
-        'btn_math': '🧮 Калькулятор',
-        'btn_quote': '💡 Цитата дня',
-        'btn_bonus': '🎁 Бонус',
-        'btn_quiz': '🎮 Викторина',
         'btn_font': '✨ Красивый шрифт',
-        'btn_weather': '🌤️ Погода',
-        'btn_translate': '🌐 Переводчик',
+        'btn_math': '🧮 Калькулятор',
         'btn_pass': '🔐 Генератор паролей',
+        'btn_quiz': '🎮 Викторина',
+        'btn_bonus': '🎁 Бонус',
         'btn_ref': '🔗 Реф. ссылка',
         'btn_profile': '📊 Профиль',
         'btn_lang': '🗣️ Язык',
@@ -127,19 +110,12 @@ TRANSLATIONS = {
         'sub_warning': '⚠️ Подпишитесь на 3 канала!',
     },
     'ar': {
-        'btn_ai': '🤖 مساعد الذكاء',
-        'btn_image': '🎨 منشئ الصور',
         'btn_qr': '📷 رمز الاستجابة',
-        'btn_short': '🔗 تقصير الرابط',
-        'btn_tts': '🗣️ تحويل النص لصوت',
-        'btn_math': '🧮 حاسبة',
-        'btn_quote': '💡 حكم اليوم',
-        'btn_bonus': '🎁 المكافأة',
-        'btn_quiz': '🎮 لعبة المسابقات',
         'btn_font': '✨ خطوط مميزة',
-        'btn_weather': '🌤️ الطقس',
-        'btn_translate': '🌐 المترجم',
+        'btn_math': '🧮 حاسبة',
         'btn_pass': '🔐 مولد كلمة السر',
+        'btn_quiz': '🎮 لعبة المسابقات',
+        'btn_bonus': '🎁 المكافأة',
         'btn_ref': '🔗 رابط الإحالة',
         'btn_profile': '📊 ملفي',
         'btn_lang': '🗣️ اللغة',
@@ -147,24 +123,105 @@ TRANSLATIONS = {
         'sub_warning': '⚠️ يجب الانضمام إلى القنوات الـ 3 أولاً!',
     },
     'ko': {
-        'btn_ai': '🤖 AI 어시스턴트',
-        'btn_image': '🎨 AI 이미지',
         'btn_qr': '📷 QR 코드',
-        'btn_short': '🔗 URL 단축',
-        'btn_tts': '🗣️ 음성 변환',
-        'btn_math': '🧮 수학 계산',
-        'btn_quote': '💡 오늘의 명언',
-        'btn_bonus': '🎁 보너스',
-        'btn_quiz': '🎮 퀴즈 게임',
         'btn_font': '✨ 예쁜 폰트',
-        'btn_weather': '🌤️ 날씨',
-        'btn_translate': '🌐 번역기',
+        'btn_math': '🧮 수학 계산',
         'btn_pass': '🔐 비밀번호 생성기',
+        'btn_quiz': '🎮 퀴즈 게임',
+        'btn_bonus': '🎁 보너스',
         'btn_ref': '🔗 추천 링크',
         'btn_profile': '📊 내 프로필',
         'btn_lang': '🗣️ 언어',
         'welcome': '🎉 환영합니다! 메뉴를 선택하세요:',
         'sub_warning': '⚠️ 3개 채널에 가입하세요!',
+    },
+    'zh': {
+        'btn_qr': '📷 二维码生成',
+        'btn_font': '✨ 花样字体',
+        'btn_math': '🧮 数学计算',
+        'btn_pass': '🔐 密码生成器',
+        'btn_quiz': '🎮 问答游戏',
+        'btn_bonus': '🎁 每日奖励',
+        'btn_ref': '🔗 推荐链接',
+        'btn_profile': '📊 个人资料',
+        'btn_lang': '🗣️ 切换语言',
+        'welcome': '🎉 欢迎！订阅已验证。请从下方选择功能：',
+        'sub_warning': '⚠️ 必须先加入所有3个频道！',
+    },
+    'id': {
+        'btn_qr': '📷 Kode QR',
+        'btn_font': '✨ Font Keren',
+        'btn_math': '🧮 Matematika',
+        'btn_pass': '🔐 Pembuat Kata Sandi',
+        'btn_quiz': '🎮 Game Kuis',
+        'btn_bonus': '🎁 Bonus Harian',
+        'btn_ref': '🔗 Tautan Rujukan',
+        'btn_profile': '📊 Profil Saya',
+        'btn_lang': '🗣️ Ubah Bahasa',
+        'welcome': (
+            '🎉 Selamat datang! Langganan diverifikasi. Pilih fitur di bawah:'
+        ),
+        'sub_warning': '⚠️ Bergabunglah dengan ke-3 saluran terlebih dahulu!',
+    },
+    'uz': {
+        'btn_qr': '📷 QR Kod',
+        'btn_font': '✨ Chiroyli Font',
+        'btn_math': '🧮 Matematika',
+        'btn_pass': '🔐 Parol Generatori',
+        'btn_quiz': '🎮 Viktorina',
+        'btn_bonus': '🎁 Kunlik Bonus',
+        'btn_ref': '🔗 Taklif Havolasi',
+        'btn_profile': '📊 Profilim',
+        'btn_lang': '🗣️ Tilni Oʻzgartirish',
+        'welcome': (
+            '🎉 Xush kelibsiz! Obuna tasdiqlandi. Quyidan funksiyani tanlang:'
+        ),
+        'sub_warning': '⚠️ Avval barcha 3 ta kanalga qoʻshiling!',
+    },
+    'kk': {
+        'btn_qr': '📷 QR Код',
+        'btn_font': '✨ Әдемі Шрифт',
+        'btn_math': '🧮 Математика',
+        'btn_pass': '🔐 Құпия сөз генераторы',
+        'btn_quiz': '🎮 Викторина',
+        'btn_bonus': '🎁 Күнделікті бонус',
+        'btn_ref': '🔗 Реферал сілтеме',
+        'btn_profile': '📊 Меңің профилім',
+        'btn_lang': '🗣️ Тілді өзгерту',
+        'welcome': (
+            '🎉 Қош келдіңіз! Жазылым расталды. Төмендегі функцияны таңдаңыз:'
+        ),
+        'sub_warning': '⚠️ Алдымен барлық 3 арнаға қосылыңыз!',
+    },
+    'tg': {
+        'btn_qr': '📷 Ремзи QR',
+        'btn_font': '✨ Шрифти зебо',
+        'btn_math': '🧮 Ҳисоби математикӣ',
+        'btn_pass': '🔐 Генератори парол',
+        'btn_quiz': '🎮 Бозии викторина',
+        'btn_bonus': '🎁 Бонуси рӯзона',
+        'btn_ref': '🔗 Истиноди даъватӣ',
+        'btn_profile': '📊 Профили ман',
+        'btn_lang': '🗣️ Интихоби забон',
+        'welcome': (
+            '🎉 Хуш омадед! Обуна тасдиқ шуд. Имкониятро аз зер интихоб кунед:'
+        ),
+        'sub_warning': '⚠️ Аввал ба ҳамаи 3 канал обуна шавед!',
+    },
+    'az': {
+        'btn_qr': '📷 QR Kod',
+        'btn_font': '✨ Qəşəng Şrift',
+        'btn_math': '🧮 Riyaziyyat',
+        'btn_pass': '🔐 Parol Generatoru',
+        'btn_quiz': '🎮 Viktorina Oyunu',
+        'btn_bonus': '🎁 Gündəlik Bonus',
+        'btn_ref': '🔗 Dəvət Linki',
+        'btn_profile': '📊 Profilim',
+        'btn_lang': '🗣️ Dili Dəyiş',
+        'welcome': (
+            '🎉 Xoş gəldiniz! Abunəlik təsdiqləndi. Aşağıdan funksiya seçin:'
+        ),
+        'sub_warning': '⚠️ Əvvəlcə bütün 3 kanala qoşulun!',
     },
 }
 
@@ -186,7 +243,7 @@ cursor.execute("""
 conn.commit()
 
 
-# --- EXACT ADMIN LOGGING FORMAT ---
+# --- EXACT ADMIN LOGGING ---
 def log_user_action(message, action_text):
   try:
     name = message.from_user.first_name or 'User'
@@ -221,7 +278,7 @@ def get_stats():
 def update_bot_description():
   try:
     total, monthly = get_stats()
-    desc = f'🤖 Mega All-In-One Telegram Bot!\n👥 Total Users: {total} (New this month: +{monthly})\n👇 Tap Start below.'
+    desc = f'🤖 All-In-One Telegram Bot!\n👥 Total Users: {total} (New this month: +{monthly})\n👇 Tap Start below.'
     bot.set_my_description(desc)
   except Exception as e:
     print('Description update error:', e)
@@ -238,7 +295,6 @@ def check_subscriptions(user_id):
   return True
 
 
-# --- FANCY FONT GENERATOR HELPER ---
 def make_fancy_text(text):
   normal = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   fancy = '𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕎𝕏𝕐ℤ𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡'
@@ -250,14 +306,14 @@ def make_fancy_text(text):
 def main_menu_keyboard(lang):
   t = TRANSLATIONS.get(lang, TRANSLATIONS['en'])
   markup = ReplyKeyboardMarkup(resize_keyboard=True)
-  markup.add(KeyboardButton(t['btn_ai']), KeyboardButton(t['btn_image']))
-  markup.add(KeyboardButton(t['btn_qr']), KeyboardButton(t['btn_short']))
-  markup.add(KeyboardButton(t['btn_tts']), KeyboardButton(t['btn_math']))
-  markup.add(KeyboardButton(t['btn_quiz']), KeyboardButton(t['btn_font']))
-  markup.add(KeyboardButton(t['btn_weather']), KeyboardButton(t['btn_translate']))
-  markup.add(KeyboardButton(t['btn_pass']), KeyboardButton(t['btn_bonus']))
-  markup.add(KeyboardButton(t['btn_quote']), KeyboardButton(t['btn_profile']))
-  markup.add(KeyboardButton(t['btn_ref']), KeyboardButton(t['btn_lang']))
+  markup.add(KeyboardButton(t['btn_qr']), KeyboardButton(t['btn_font']))
+  markup.add(KeyboardButton(t['btn_math']), KeyboardButton(t['btn_pass']))
+  markup.add(KeyboardButton(t['btn_quiz']), KeyboardButton(t['btn_bonus']))
+  markup.add(
+      KeyboardButton(t['btn_ref']),
+      KeyboardButton(t['btn_profile']),
+      KeyboardButton(t['btn_lang']),
+  )
   return markup
 
 
@@ -275,7 +331,7 @@ def subscription_keyboard():
   return markup
 
 
-# --- GROUP HELPER (WELCOME & ANTI-LINK) ---
+# --- GROUP HELPER ---
 @bot.message_handler(
     content_types=['new_chat_members'],
     func=lambda message: message.chat.type in ['group', 'supergroup'],
@@ -284,7 +340,7 @@ def welcome_group_members(message):
   for user in message.new_chat_members:
     welcome_text = (
         f'👋 Welcome {user.first_name} to **{message.chat.title}**!\nEnjoy your'
-        ' stay and obey rules.'
+        ' stay and follow the rules.'
     )
     bot.send_message(message.chat.id, welcome_text, parse_mode='Markdown')
 
@@ -447,7 +503,7 @@ def callback_handler(call):
       )
 
 
-# --- MAIN TEXT & FEATURE HANDLER ---
+# --- MAIN TEXT HANDLER ---
 @bot.message_handler(
     func=lambda message: message.chat.type == 'private',
     content_types=['text', 'photo', 'document', 'video'],
@@ -498,34 +554,21 @@ def handle_private_text(message):
   state, lang, points, last_bonus = row if row else ('IDLE', 'en', 0, None)
   t = TRANSLATIONS.get(lang, TRANSLATIONS['en'])
 
-  # --- BUTTON CLICK CHECKS ---
-  if text in [t['btn_ai'], '🤖 AI Assistant', '🤖 এআই চ্যাট']:
-    cursor.execute(
-        "UPDATE users SET state = 'WAITING_AI' WHERE user_id = ?", (user_id,)
-    )
-    conn.commit()
-    bot.send_message(message.chat.id, '🤖 Ask me anything! Send your question:')
-    log_user_action(message, 'Opened AI Assistant')
-
-  elif text in [t['btn_short'], '🔗 Short URL', '🔗 লিংক ছোট করুন']:
-    cursor.execute(
-        "UPDATE users SET state = 'WAITING_SHORT' WHERE user_id = ?", (user_id,)
-    )
-    conn.commit()
-    bot.send_message(message.chat.id, '🔗 Send long URL to shorten:')
-    log_user_action(message, 'Opened URL Shortener')
-
-  elif text in [t['btn_tts'], '🗣️ Text to Speech', '🗣️ লেখা থেকে ভয়েস']:
-    cursor.execute(
-        "UPDATE users SET state = 'WAITING_TTS' WHERE user_id = ?", (user_id,)
-    )
-    conn.commit()
-    bot.send_message(
-        message.chat.id, '🗣️ Send text to convert into voice audio:'
-    )
-    log_user_action(message, 'Opened Text to Speech')
-
-  elif text in [t['btn_font'], '✨ Fancy Font', '✨ স্টাইলিশ ফন্ট']:
+  # --- BUTTON TRIGGERS (MATCHES ALL 11 LANGUAGES) ---
+  if text in [
+      t['btn_font'],
+      '✨ Fancy Font',
+      '✨ স্টাইলিশ ফন্ট',
+      '✨ Красивый шрифт',
+      '✨ خطوط مميزة',
+      '✨ 예쁜 폰特',
+      '✨ 花样字体',
+      '✨ Font Keren',
+      '✨ Chiroyli Font',
+      '✨ Әдемі Шрифт',
+      '✨ Шрифти зебо',
+      '✨ Qəşəng Şrift',
+  ]:
     cursor.execute(
         "UPDATE users SET state = 'WAITING_FONT' WHERE user_id = ?", (user_id,)
     )
@@ -535,30 +578,22 @@ def handle_private_text(message):
     )
     log_user_action(message, 'Opened Fancy Font Generator')
 
-  elif text in [t['btn_weather'], '🌤️ Weather', '🌤️ আবহাওয়া']:
-    cursor.execute(
-        "UPDATE users SET state = 'WAITING_WEATHER' WHERE user_id = ?",
-        (user_id,),
-    )
-    conn.commit()
-    bot.send_message(
-        message.chat.id, '🌤️ Send city name to check live weather (e.g. Dhaka):'
-    )
-    log_user_action(message, 'Opened Weather Check')
-
-  elif text in [t['btn_translate'], '🌐 Translator', '🌐 অনুবাদক']:
-    cursor.execute(
-        "UPDATE users SET state = 'WAITING_TRANS' WHERE user_id = ?", (user_id,)
-    )
-    conn.commit()
-    bot.send_message(
-        message.chat.id, '🌐 Send text to translate into English:'
-    )
-    log_user_action(message, 'Opened Text Translator')
-
-  elif text in [t['btn_pass'], '🔐 Password Gen', '🔐 পাসওয়ার্ড জেনারেটর']:
+  elif text in [
+      t['btn_pass'],
+      '🔐 Password Gen',
+      '🔐 পাসওয়ার্ড জেনারেটর',
+      '🔐 Генератор паролей',
+      '🔐 مولد كلمة السر',
+      '🔐 비밀번호 생성기',
+      '🔐 密码生成器',
+      '🔐 Pembuat Kata Sandi',
+      '🔐 Parol Generatori',
+      '🔐 Құпия сөз генераторы',
+      '🔐 Генератори парол',
+      '🔐 Parol Generatoru',
+  ]:
     chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()'
-    new_pass = ''.join(random.choice(chars) for _ in range(12))
+    new_pass = ''.join(random.choice(chars) for _ in range(14))
     bot.send_message(
         message.chat.id,
         f'🔐 **Your Generated Secure Password:**\n`{new_pass}`',
@@ -566,7 +601,19 @@ def handle_private_text(message):
     )
     log_user_action(message, 'Generated Secure Password')
 
-  elif text in [t['btn_quiz'], '🎮 Quiz Game', '🎮 কুইজ গেম']:
+  elif text in [
+      t['btn_quiz'],
+      '🎮 Quiz Game',
+      '🎮 কুইজ গেম',
+      '🎮 Викторина',
+      '🎮 لعبة المسابقات',
+      '🎮 퀴즈 게임',
+      '🎮 问答游戏',
+      '🎮 Game Kuis',
+      '🎮 Viktorina',
+      '🎮 Бозии викторина',
+      '🎮 Viktorina Oyunu',
+  ]:
     q_data = random.choice(QUIZ_QUESTIONS)
     markup = InlineKeyboardMarkup()
     for opt in q_data['options']:
@@ -580,21 +627,20 @@ def handle_private_text(message):
     )
     log_user_action(message, 'Started Quiz Game')
 
-  elif text in [t['btn_quote'], '💡 Daily Quote', '💡 মোটিভেশনাল কোটস']:
-    try:
-      res = requests.get('https://api.quotable.io/random', timeout=5).json()
-      quote = f"💡 *\"{res['content']}\"*\n\n— _{res['author']}_"
-      bot.send_message(message.chat.id, quote, parse_mode='Markdown')
-    except Exception:
-      bot.send_message(
-          message.chat.id,
-          '💡 *\"Believe you can and you\'re halfway there.\"*\n\n— _Theodore'
-          ' Roosevelt_',
-          parse_mode='Markdown',
-      )
-    log_user_action(message, 'Requested Daily Quote')
-
-  elif text in [t['btn_bonus'], '🎁 Daily Bonus', '🎁 ডেইলি বোনাস']:
+  elif text in [
+      t['btn_bonus'],
+      '🎁 Daily Bonus',
+      '🎁 ডেইলি বোনাস',
+      '🎁 Бонус',
+      '🎁 المكافأة',
+      '🎁 보너스',
+      '🎁 每日奖励',
+      '🎁 Bonus Harian',
+      '🎁 Kunlik Bonus',
+      '🎁 Күнделікті бонус',
+      '🎁 Бонуси рӯзона',
+      '🎁 Gündəlik Bonus',
+  ]:
     today = str(date.today())
     if last_bonus == today:
       bot.send_message(
@@ -614,7 +660,17 @@ def handle_private_text(message):
       )
       log_user_action(message, 'Claimed Daily Bonus (+5 Points)')
 
-  elif text in [t['btn_qr'], '📷 QR Code', '📷 কিউআর কোড']:
+  elif text in [
+      t['btn_qr'],
+      '📷 QR Code',
+      '📷 কিউআর কোড',
+      '📷 QR Код',
+      '📷 رمز الاستجابة',
+      '📷 QR 코드',
+      '📷 二维码生成',
+      '📷 Kode QR',
+      '📷 QR Kod',
+  ]:
     cursor.execute(
         "UPDATE users SET state = 'WAITING_QR' WHERE user_id = ?", (user_id,)
     )
@@ -622,15 +678,18 @@ def handle_private_text(message):
     bot.send_message(message.chat.id, '📷 Send text or URL for QR Code:')
     log_user_action(message, 'Opened QR Code Generator')
 
-  elif text in [t['btn_image'], '🎨 Image AI', '🎨 ইমেজ জেনারেটর']:
-    cursor.execute(
-        "UPDATE users SET state = 'WAITING_IMAGE' WHERE user_id = ?", (user_id,)
-    )
-    conn.commit()
-    bot.send_message(message.chat.id, '🎨 Send English prompt for Image AI:')
-    log_user_action(message, 'Opened Image Generator')
-
-  elif text in [t['btn_math'], '🧮 Math Solver', '🧮 ম্যাথ সলভার']:
+  elif text in [
+      t['btn_math'],
+      '🧮 Math Solver',
+      '🧮 ম্যাথ সলভার',
+      '🧮 Калькулятор',
+      '🧮 حاسبة',
+      '🧮 수학 계산',
+      '🧮 数学计算',
+      '🧮 Matematika',
+      '🧮 Ҳисоби математикӣ',
+      '🧮 Riyaziyyat',
+  ]:
     cursor.execute(
         "UPDATE users SET state = 'WAITING_MATH' WHERE user_id = ?", (user_id,)
     )
@@ -638,7 +697,19 @@ def handle_private_text(message):
     bot.send_message(message.chat.id, '🧮 Send math expression (e.g. 50 * 2):')
     log_user_action(message, 'Opened Math Solver')
 
-  elif text in [t['btn_profile'], '📊 My Profile', '📊 আমার প্রোফাইল']:
+  elif text in [
+      t['btn_profile'],
+      '📊 My Profile',
+      '📊 আমার প্রোফাইল',
+      '📊 Профиль',
+      '📊 ملفي',
+      '📊 내 프로필',
+      '📊 个人资料',
+      '📊 Profil Saya',
+      '📊 Profilim',
+      '📊 Меңің профилім',
+      '📊 Профили ман',
+  ]:
     bot.send_message(
         message.chat.id,
         f'📊 **Your Profile:**\n\n🆔 User ID: `{user_id}`\n⭐ Points:'
@@ -647,7 +718,20 @@ def handle_private_text(message):
     )
     log_user_action(message, 'Checked Profile')
 
-  elif text in [t['btn_ref'], '🔗 Referral', '🔗 রেফারেল লিংক']:
+  elif text in [
+      t['btn_ref'],
+      '🔗 Referral',
+      '🔗 রেফারেল লিংক',
+      '🔗 Реф. ссылка',
+      '🔗 رابط الإحالة',
+      '🔗 추천 링크',
+      '🔗 推荐链接',
+      '🔗 Tautan Rujukan',
+      '🔗 Taklif Havolasi',
+      '🔗 Реферал сілтеме',
+      '🔗 Истиноди даъватӣ',
+      '🔗 Dəvət Linki',
+  ]:
     bot_info = bot.get_me()
     bot.send_message(
         message.chat.id,
@@ -657,7 +741,20 @@ def handle_private_text(message):
     )
     log_user_action(message, 'Requested Referral Link')
 
-  elif text in [t['btn_lang'], '🗣️ Language', '🗣️ ভাষা পরিবর্তন']:
+  elif text in [
+      t['btn_lang'],
+      '🗣️ Language',
+      '🗣️ ভাষা পরিবর্তন',
+      '🗣️ Язык',
+      '🗣️ اللغة',
+      '🗣️ 언어',
+      '🗣️ 切换语言',
+      '🗣️ Ubah Bahasa',
+      '🗣️ Tilni Oʻzgartirish',
+      '🗣️ Тілді өзгерту',
+      '🗣️ Интихоби забон',
+      '🗣️ Dili Dəyiş',
+  ]:
     markup = InlineKeyboardMarkup(row_width=2)
     markup.add(
         InlineKeyboardButton('English 🇬🇧', callback_data='lang_en'),
@@ -665,6 +762,12 @@ def handle_private_text(message):
         InlineKeyboardButton('Russian 🇷🇺', callback_data='lang_ru'),
         InlineKeyboardButton('Arabic 🇸🇦', callback_data='lang_ar'),
         InlineKeyboardButton('Korean 🇰🇷', callback_data='lang_ko'),
+        InlineKeyboardButton('Chinese 🇨🇳', callback_data='lang_zh'),
+        InlineKeyboardButton('Indonesian 🇮🇩', callback_data='lang_id'),
+        InlineKeyboardButton('Uzbek 🇺🇿', callback_data='lang_uz'),
+        InlineKeyboardButton('Kazakh 🇰🇿', callback_data='lang_kk'),
+        InlineKeyboardButton('Tajik 🇹🇯', callback_data='lang_tg'),
+        InlineKeyboardButton('Azerbaijani 🇦🇿', callback_data='lang_az'),
     )
     bot.send_message(
         message.chat.id, '🗣️ Select your language:', reply_markup=markup
@@ -686,92 +789,6 @@ def handle_private_text(message):
       )
       conn.commit()
 
-    elif state == 'WAITING_WEATHER':
-      try:
-        res = requests.get(
-            f'https://wttr.in/{urllib.parse.quote(text)}?format=3', timeout=5
-        ).text
-        bot.send_message(message.chat.id, f'🌤️ **Weather Info:**\n{res}')
-        log_user_action(message, f'Checked Weather for: {text}')
-      except Exception:
-        bot.send_message(message.chat.id, '❌ Failed to fetch weather info.')
-      cursor.execute(
-          "UPDATE users SET state = 'IDLE' WHERE user_id = ?", (user_id,)
-      )
-      conn.commit()
-
-    elif state == 'WAITING_TRANS':
-      try:
-        res = requests.get(
-            'https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q='
-            + urllib.parse.quote(text),
-            timeout=5,
-        ).json()
-        translated_text = res[0][0][0]
-        bot.send_message(
-            message.chat.id, f'🌐 **Translated (English):**\n{translated_text}'
-        )
-        log_user_action(message, f'Translated text: {text}')
-      except Exception:
-        bot.send_message(message.chat.id, '❌ Failed to translate text.')
-      cursor.execute(
-          "UPDATE users SET state = 'IDLE' WHERE user_id = ?", (user_id,)
-      )
-      conn.commit()
-
-    elif state == 'WAITING_AI':
-      bot.send_message(message.chat.id, '🤖 Thinking...')
-      try:
-        res = requests.get(
-            'https://api.simsimi.vn/v1/simtalk?text='
-            f'{urllib.parse.quote(text)}&lc=en',
-            timeout=5,
-        ).json()
-        reply = res.get('message', 'Sorry, I could not process that.')
-        bot.send_message(message.chat.id, f'🤖 **AI:** {reply}')
-        log_user_action(message, f'AI Chat Query: {text}')
-      except Exception:
-        bot.send_message(
-            message.chat.id, '🤖 I am busy right now. Try again later.'
-        )
-      cursor.execute(
-          "UPDATE users SET state = 'IDLE' WHERE user_id = ?", (user_id,)
-      )
-      conn.commit()
-
-    elif state == 'WAITING_SHORT':
-      try:
-        res = requests.get(
-            'https://is.gd/create.php?format=json&url='
-            f'{urllib.parse.quote(text)}',
-            timeout=5,
-        ).json()
-        short_url = res.get('shorturl', 'Invalid URL')
-        bot.send_message(message.chat.id, f'🔗 **Shortened URL:**\n{short_url}')
-        log_user_action(message, f'Shortened URL for: {text}')
-      except Exception:
-        bot.send_message(message.chat.id, '❌ Failed to shorten URL.')
-      cursor.execute(
-          "UPDATE users SET state = 'IDLE' WHERE user_id = ?", (user_id,)
-      )
-      conn.commit()
-
-    elif state == 'WAITING_TTS':
-      try:
-        tts = gTTS(text=text, lang='en')
-        filename = f'tts_{user_id}.mp3'
-        tts.save(filename)
-        with open(filename, 'rb') as audio:
-          bot.send_voice(message.chat.id, audio)
-        os.remove(filename)
-        log_user_action(message, f'Text to Speech Audio: {text}')
-      except Exception:
-        bot.send_message(message.chat.id, '❌ Failed to convert text to speech.')
-      cursor.execute(
-          "UPDATE users SET state = 'IDLE' WHERE user_id = ?", (user_id,)
-      )
-      conn.commit()
-
     elif state == 'WAITING_QR':
       qr_url = (
           'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data='
@@ -779,18 +796,6 @@ def handle_private_text(message):
       )
       bot.send_photo(message.chat.id, qr_url, caption='✨ QR Code Generated')
       log_user_action(message, f'Generated QR Code for: {text}')
-      cursor.execute(
-          "UPDATE users SET state = 'IDLE' WHERE user_id = ?", (user_id,)
-      )
-      conn.commit()
-
-    elif state == 'WAITING_IMAGE':
-      bot.send_message(message.chat.id, '🎨 Generating image...')
-      image_url = (
-          f'https://image.pollinations.ai/prompt/{urllib.parse.quote(text)}'
-      )
-      bot.send_photo(message.chat.id, image_url, caption=f'✨ Prompt: {text}')
-      log_user_action(message, f'Text to Image Prompt: {text}')
       cursor.execute(
           "UPDATE users SET state = 'IDLE' WHERE user_id = ?", (user_id,)
       )
@@ -828,5 +833,5 @@ if __name__ == '__main__':
   t = threading.Thread(target=run_web)
   t.daemon = True
   t.start()
-  print('Mega All-in-One Super Bot is running live on Render...')
+  print('Multi-Language Super Bot is running live on Render...')
   bot.infinity_polling(skip_pending=True)
